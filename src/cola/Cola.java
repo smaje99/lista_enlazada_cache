@@ -23,7 +23,7 @@ public class Cola {
     }
 
     public boolean push(Persona dato) {
-        if (dato != null && !isEmpty() && !isFull()) {
+        if (dato != null && !isFull()) {
             cola[tope++] = dato;
             return true;
         }
@@ -54,5 +54,9 @@ public class Cola {
             }
         }
         return null;
+    }
+
+    public boolean contains(String nombreCompleto) {
+        return search(nombreCompleto) != null;
     }
 }

@@ -35,7 +35,7 @@ public class Lista {
     }
 
     private void addCache(Persona dato) {
-        if (!cache.push(dato)) {
+        if (!cache.contains(dato.getNombreCompleto()) && !cache.push(dato)) {
             cache.pop();
             cache.push(dato);
         }
