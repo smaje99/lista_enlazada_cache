@@ -1,12 +1,13 @@
 package lista;
 
+import cola.Cola;
 import dato.Persona;
 
 public class Lista {
     private int len;
     private Nodo head;
     private Nodo tail;
-    private final Persona[] cache;
+    private final Cola cache;
 
     public Lista() {
         this(5);
@@ -16,8 +17,7 @@ public class Lista {
         len = 0;
         head = null;
         tail = null;
-        cache = new Persona[lenCache];
-        for (int i = 0; i < lenCache; i++) cache[i] = null;
+        cache = new Cola(lenCache);
     }
 
     public boolean isEmpty() {
@@ -35,36 +35,14 @@ public class Lista {
     }
 
     private void addCache(Persona dato) {
-        if (dato != null) {
-            // Comprobando que el dato no exista en el cache
-            int index;
-            for (index = 0; index < cache.length; index++) {
-                if (cache[index] == null) break;
-                else if (cache[index].equals(dato.getNombreCompleto())) return;
-            }
-
-            // Buscando espacios vacíos para añadir el dato en el cache
-            if (index < 5) {
-                cache[index] = dato;
-                return;
-            }
-
-            // añadiendo el dato a cache como si fuese una cola limitada
-            for (int i = 0; i < cache.length - 1; i++) cache[i] = cache[i + 1];
-            cache[cache.length - 1] = dato;
+        if (!cache.push(dato)) {
+            cache.pop();
+            cache.push(dato);
         }
     }
 
     private Persona searchCache(String nombreCompleto) {
-        if (cache[0] != null && cache[0].equals(nombreCompleto))
-            return cache[0];
-        else if (cache[cache.length - 1] != null && cache[cache.length - 1].equals(nombreCompleto))
-            return cache[cache.length - 1];
-        else
-            for (Persona persona : cache)
-                if (persona != null && persona.equals(nombreCompleto))
-                    return persona;
-        return null;
+        return cache.search(nombreCompleto);
     }
 
     private Persona searchList(String nombreCompleto) {

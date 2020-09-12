@@ -23,7 +23,7 @@ public class Cola {
     }
 
     public boolean push(Persona dato) {
-        if (!isEmpty() && !isFull()) {
+        if (dato != null && !isEmpty() && !isFull()) {
             cola[tope++] = dato;
             return true;
         }
