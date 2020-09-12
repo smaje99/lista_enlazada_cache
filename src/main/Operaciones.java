@@ -53,6 +53,6 @@ public class Operaciones {
         long start = System.currentTimeMillis();
         Persona persona = lista.search("Sergio Majé");
         long end = System.currentTimeMillis();
-        return (end - start) + "\n" + (persona != null ? persona.toString() : "Not Found!");
+        return (end - start) + "ms\n" + (persona != null ? persona.toString() : "Not Found!");
     }
 }
